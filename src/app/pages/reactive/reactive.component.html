@@ -58,13 +58,17 @@
         <input type="text"
                class="form-control"
                placeholder="Calle"
-               formControlName="calle">
+               formControlName="calle"
+               [class.is-invalid]="calleNoValida">
+               <small class="text-danger" *ngIf="calleNoValida">Dirreción inválida</small>
       </div>
       <div class="col">
         <input type="text"
                class="form-control"
                placeholder="Colonia"
-               formControlName="colonia">
+               formControlName="colonia"
+               [class.is-invalid]="coloniaNoValida">
+              <small class="text-danger" *ngIf="coloniaNoValida">Colonia inválida</small>
       </div>
     </div>
   </div>

@@ -29,6 +29,14 @@ export class ReactiveComponent implements OnInit {
     return this.forma.get('correo').invalid && this.forma.get('correo').touched
   }
 
+  get calleNoValida() {
+    return this.forma.get('direccion.calle').invalid && this.forma.get('direccion.calle').touched
+  }
+
+  get coloniaNoValida() {
+    return this.forma.get('direccion.colonia').invalid && this.forma.get('direccion.colonia').touched
+  }
+
   crearFormulario() {
     this.forma = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(5)]],
@@ -46,7 +54,11 @@ export class ReactiveComponent implements OnInit {
     if ( this.forma.invalid ) {
 
       return Object.values( this.forma.controls ).forEach( control => {
-        control.markAsTouched();
+        if (control instanceof FormGroup ) {
+          Object.values( control.controls ).forEach( control => control.markAsTouched() );
+        } else {
+          control.markAsTouched();
+        }   
       });
    
     }
